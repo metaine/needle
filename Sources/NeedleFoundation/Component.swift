@@ -271,7 +271,7 @@ open class Component<DependencyType>: Scope {
     private let sharedInstanceLock = NSRecursiveLock()
     private var sharedInstances = [String: Any]()
     private lazy var name: String = {
-        let fullyQualifiedSelfName = String(describing: self)
+        let fullyQualifiedSelfName = String(describing: self).replacingOccurrences(of: "\\s?\\<[\\w\\s\\.]*\\>", with: "", options: .regularExpression)
         let parts = fullyQualifiedSelfName.components(separatedBy: ".")
         return parts.last ?? fullyQualifiedSelfName
     }()
